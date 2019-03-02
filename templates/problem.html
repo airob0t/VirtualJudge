@@ -1,0 +1,32 @@
+{% extends "base_list.html" %}
+
+{% block title %}题目列表{% endblock %}
+
+{% block navbar %}{% include "include/navbar-problem.html" %}{% endblock %}
+{% block filter %}{% include "problem/include/filter.html" %}{% endblock %}
+
+{% block pageurl %}题目{% endblock %}
+
+{% block list %}
+<col width="10%" />
+<col width="40%" />
+<col width="18%" />
+<col width="12%" />
+<col width="20%" />
+<tr>
+    <th>ID</th>
+    <th>名称</th>
+    <th>解决数/提交数</th>
+    <th>OJ</th>
+    <th>更新时间</th>
+</tr>
+{% for problem in problem_list %}
+<tr>
+    <th>{{ problem.id }}</th>
+    <th><a href="/problem/{{ problem.id }}">{{ problem.title }}</a></th>
+    <th>{{ problem.accepted }}/{{ problem.submit }}</th>
+    <th>{{ problem.remote_oj }}</th>
+    <th>{{ problem.update_time }}</th>
+</tr>
+{% endfor %}
+{% endblock %}

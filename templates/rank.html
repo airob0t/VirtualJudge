@@ -1,0 +1,35 @@
+{% extends "base_list.html" %}
+
+{% block title %}排名{% endblock %}
+
+{% block navbar %}{% include "include/navbar-rank.html" %}{% endblock %}
+{% block filter %}{% include "rank/include/filter.html" %}{% endblock %}
+
+{% block pageurl %}排名{% endblock %}
+
+{% block list %}
+<col width="10%" />
+<col width="20%" />
+<col width="20" />
+<col width="18%" />
+<col width="12%" />
+<col width="20%" />
+<tr>
+    <th>ID</th>
+    <th>用户名</th>
+    <th>昵称</th>
+    <th>学校</th>
+    <th>解题数</th>
+    <th>尝试数</th>
+</tr>
+{% for item in user_list %}
+<tr>
+    <th>{{ item.id }}</th>
+    <th>{{ item.username }}</th>
+    <th>{{ item.nickname }}</th>
+    <th>{{ item.school }}</th>
+    <th>{{ item.solved }}</th>
+    <th>{{ item.attempted }}</th>
+</tr>
+{% endfor %}
+{% endblock %}

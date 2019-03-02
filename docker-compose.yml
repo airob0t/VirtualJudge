@@ -1,0 +1,34 @@
+version: "3"
+services:
+
+  vj-redis:
+    image: redis:4.0
+    container_name: vj-redis
+    restart: always
+#    volumes:
+#      - ~/data/redis-dev:/data
+    ports:
+      - '6379:6379'
+
+  vj-postgres:
+    image: postgres:10
+    container_name: vj-postgres
+    restart: always
+    volumes:
+      - ~/data/postgres-dev:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=vj_database
+      - POSTGRES_USER=vj_username
+      - POSTGRES_PASSWORD=vj_password
+    ports:
+      - '0.0.0.0:5432:5432'
+
+  vj-backend:
+    image: virtualjudge/virtualjudge
+    container_name: vj-web
+    restart: always
+    links:
+      - vj-redis
+      - vj-postgres
+    ports:
+      - '0.0.0.0:80:80'

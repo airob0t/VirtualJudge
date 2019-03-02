@@ -1,0 +1,45 @@
+{% extends "base_list.html" %}
+
+{% block title %}比赛列表{% endblock %}
+
+{% block navbar %}{% include "include/navbar-contest.html" %}{% endblock %}
+{% block filter %}{% include "contest/include/filter.html" %}{% endblock %}
+
+{% block pageheaderright %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'contestcreate' %}" class="btn btn-success pull-right">Create</a>
+    {% endif %}
+{% endblock %}
+{% block list %}
+<col width="10%" />
+<col width="22%" />
+<col width="10%" />
+<col width="20%" />
+<col width="20%" />
+<col width="18%" />
+<tr>
+    <th>管理者</th>
+    <th>名称</th>
+    <th>公开</th>
+    <th>开始时间</th>
+    <th>结束时间</th>
+    <th>操作</th>
+</tr>
+{% for item in contest_list %}
+<tr>
+    <th>{{ item.manager.username }}</th>
+    <th><a href="/contest/{{ item.id }}">{{ item.name }}</a></th>
+    <th>{% if item.is_public %}<label class="label label-success">公开</label> {% else %}<label class="label label-warning">私有</label>{% endif %}</th>
+    <th>{{ item.start_time }}</th>
+    <th>{{ item.end_time }}</th>
+    <th>
+        {% if item.manager == request.user %}
+            <a href="/contest/{{ item.id }}/change" class="btn btn-primary">修改</a>
+            <a href="/contest/{{ item.id }}/delete" class="btn btn-warning">删除</a>
+        {% else %}
+            <a href="/contest/{{ item.id }}/join" class="btn btn-primary">加入</a>
+        {% endif %}
+    </th>
+</tr>
+{% endfor %}
+{% endblock %}

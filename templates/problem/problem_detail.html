@@ -1,0 +1,33 @@
+{% extends "problem/problem_base.html" %}
+
+{% block detail %}
+<h3>描述</h3>
+<div class="well">{{ problem.description|safe }}</div>
+
+<h3>输入</h3>
+<div class="well">{{ problem.input_description|safe }}</div>
+
+<h3>输出</h3>
+<div class="well">{{ problem.output_description|safe }}</div>
+
+{% if problem.sample %}
+<h3>样例</h3>
+{% for s in problem.sample %}
+<h4>输入</h4>
+<pre>{{ s.input }}</pre>
+<h4>输出</h4>
+<pre>{{ s.output }}</pre>
+{% endfor %}
+{% endif %}
+
+{% if problem.hint %}
+<h3>提示</h3>
+<div class="well">{{ problem.hint }}</div>
+{% endif %}
+
+{% if not request.session.contest %}
+<h3>来源</h3>
+<div class="well"><a href="{{ problem.remote_url }}">{{ problem.remote_url }}</a></div>
+{% endif %}
+
+{% endblock %}

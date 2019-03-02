@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}注册{% endblock %}
+
+{% block navbar %}{% include "include/navbar.html" %}{% endblock %}
+
+{% block content %}
+
+<form class="form-horizontal container-fluid" action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    <div class="row">
+        <div class=" col-md-6 col-md-offset-3">
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+                {% if field.help_text %}
+                    <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="row">
+        <div class=" col-md-6 col-md-offset-3">
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-primary btn-block">注册</button>
+                <input type="hidden" name="next" value="/"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class=" col-md-6 col-md-offset-3">
+            <div class="flex-left top-gap text-small">
+                <div class="unit-2-3"><span>已有账号？<a href="{% url 'login' %}?next=/">立即登录</a></span></div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

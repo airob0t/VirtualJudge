@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ contest.name }}{% endblock %}
+
+{% block navbar %}{% include "include/navbar-contest.html" %}{% endblock %}
+
+{% block header %}
+<h1>{{ contest.name }}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        {% include "contest/include/subnav.html" %}
+    </div>
+    {% block detail %}{% endblock %}
+{% endblock %}

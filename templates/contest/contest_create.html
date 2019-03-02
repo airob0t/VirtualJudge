@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}创建比赛{% endblock %}
+
+{% block navbar %}{% include "include/navbar.html" %}{% endblock %}
+
+{% block content %}
+
+<form class="form-horizontal container-fluid" action="{% url 'contestcreate' %}" method="POST">
+    {% csrf_token %}
+    {#  加载select2文件  #}
+    {{ form.media.css }}
+    {{ form.media.js }}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    <div class="row">
+        <div class=" col-md-6 col-md-offset-3">
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+                {% if field.help_text %}
+                    <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="row">
+        <div class=" col-md-6 col-md-offset-3">
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-primary btn-block">创建比赛</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block script %}
+    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+{% endblock %}

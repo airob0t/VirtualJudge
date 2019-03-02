@@ -1,0 +1,39 @@
+{% extends "base_list.html" %}
+
+{% block title %}Virtual Judge{% endblock %}
+
+{% block navbar %}{% include "include/navbar.html" %}{% endblock %}
+
+{% block header %}
+<div class="jumbotron">
+        <h1>虚拟在线评测系统</h1>
+        <p>虚拟在线测评系统不是真正的在线测评系统。它可以从其他普通的在线测评系统那里抓取问题, 并模拟提交给其他在线测评系统。它的目的是在没有测试数据的情况下举行比赛。</p>
+</div>
+<h1>公告</h1>
+{% endblock %}
+
+{% block list %}
+    {% if info %}
+        <div class="alert alert-info" role="alert">
+            <strong>{{ info }}</strong>
+        </div>
+    {% endif %}
+<col width="20%" />
+<col width="30%" />
+<col width="28%" />
+<col width="22%" />
+<tr>
+    <th>ID</th>
+    <th>标题</th>
+    <th>发布者</th>
+    <th>时间</th>
+</tr>
+{% for item in news_list %}
+<tr>
+    <th>{{ item.id }}</th>
+    <th><a href="{% url 'news' item.id %}">{{ item.title }}</a></th>
+    <th>{{ item.author }}</th>
+    <th>{{ item.release_time }}</th>
+</tr>
+{% endfor %}
+{% endblock %}

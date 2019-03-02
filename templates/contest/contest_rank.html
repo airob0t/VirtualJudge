@@ -1,0 +1,31 @@
+{% extends "base_list.html" %}
+
+{% block title %}排名{% endblock %}
+
+{% block navbar %}{% include "include/navbar-rank.html" %}{% endblock %}
+
+{% block pageurl %}排名{% endblock %}
+
+{% block list %}
+<col width="10%" />
+<col width="40%" />
+<col width="18%" />
+<col width="12%" />
+<col width="20%" />
+<tr>
+    <th>id</th>
+    <th>用户名</th>
+    <th>比赛</th>
+    <th>解决数</th>
+    <th>时间</th>
+</tr>
+{% for item in contestrank_list %}
+<tr>
+    <th>{{ item.id }}</th>
+    <th>{{ item.user.username }}</th>
+    <th>{{ item.contest.name }}</th>
+    <th>{{ item.ac }}</th>
+    <th>{{ item.seconds }}</th>
+</tr>
+{% endfor %}
+{% endblock %}

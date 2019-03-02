@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Submit{% endblock %}
+
+{% block navbar %}{% include "include/navbar.html" %}{% endblock %}
+
+{% block content %}
+
+    {% if contest %}
+        <div class="alert alert-info" role="alert">
+        你正在参与比赛<strong>{{ contest }}</strong>, 提交比赛外的题目必须<a href="{% url 'contestleave' %}">离开比赛</a>
+    </div>
+    {% endif %}
+
+    <form class="form-horizontal container-fluid" method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+        <div class="row">
+            <div class=" col-md-6 col-md-offset-3">
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                    {% if field.help_text %}
+                        <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row">
+            <div class=" col-md-6 col-md-offset-3">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">提交</button>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

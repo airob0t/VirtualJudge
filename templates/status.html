@@ -1,0 +1,46 @@
+{% extends "base_list.html" %}
+
+{% block title %}提交记录{% endblock %}
+
+{% block navbar %}{% include "include/navbar-status.html" %}{% endblock %}
+{% block filter %}{% include "submission/include/filter.html" %}{% endblock %}
+
+{% block pageurl %}提交记录{% endblock %}
+
+{% block list %}
+    {% if info %}
+        <div class="alert alert-info" role="alert">
+            <strong>{{ info }}</strong>
+        </div>
+    {% endif %}
+<col width="10%" />
+<col width="20%" />
+<col width="18%" />
+<col width="12%" />
+<col width="20%" />
+<col width="20%" />
+<tr>
+    <th>ID</th>
+    <th>用户名</th>
+    <th>OJ</th>
+    <th>题目</th>
+    <th>结果</th>
+    <th>提交时间</th>
+</tr>
+{% for item in submission_list %}
+<tr>
+    <th>
+        {% if item.public and not reqeusts.session.contest or item.user == request.user %}
+            <a href="{% url 'submission' item.id %}">{{ item.id }}</a>
+        {% else %}
+            {{ item.id }}
+        {% endif %}
+    </th>
+    <th>{{ item.user.username }}</th>
+    <th>{{ item.problem.remote_oj }}</th>
+    <th><a href="/problem/{{ item.problem_id }}">{{ item.problem.title }}</a></th>
+    <th><label class="label label-default">{{ item.judge_result }}</label></th>
+    <th>{{ item.submit_time }}</th>
+</tr>
+{% endfor %}
+{% endblock %}

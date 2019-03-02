@@ -1,0 +1,28 @@
+{% extends "contest/contest_base.html" %}
+
+{% block detail %}
+    <pre>{{ contest.description }}</pre>
+    <table class="table table-hover table-striped">
+        <col width="10%" />
+        <col width="40%" />
+        <col width="18%" />
+        <col width="12%" />
+        <col width="20%" />
+        <tr>
+            <th>#</th>
+            <th>题目名</th>
+            <th>解决数/提交数</th>
+            <th>来源</th>
+            <th>更新时间</th>
+        </tr>
+        {% for problem in contest.problems.all %}
+        <tr>
+            <th>{{ problem.id }}</th>
+            <th><a href="/problem/{{ problem.id }}">{{ problem.title }}</a></th>
+            <th>{{ problem.accepted }}/{{ problem.submit }}</th>
+            <th><a href="">{{ problem.source }}</a></th>
+            <th>{{ problem.update_time }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

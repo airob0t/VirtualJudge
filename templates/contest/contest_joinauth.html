@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}参加比赛{% endblock %}
+
+{% block navbar %}{% include "include/navbar.html" %}{% endblock %}
+
+{% block content %}
+{% if info %}
+    <div class="alert alert-danger" role="alert">
+        <strong>{{ info }}</strong>
+    </div>
+{% endif %}
+<form class="form-horizontal container-fluid" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class=" col-md-6 col-md-offset-3">
+            <div class="form-group">
+                <label for="id_joinpassword">比赛口令:</label>
+                <input type="text" name="joinpassword" class="form-control" placeholder="Joinpassword" maxlength="254" id="id_joinpassword">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class=" col-md-6 col-md-offset-3">
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-primary btn-block">参加比赛</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

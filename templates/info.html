@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Virtual Judge{% endblock %}
+
+{% block navbar %}{% include "include/navbar-about.html" %}{% endblock %}
+
+{% block header %}
+<h1>信息</h1>
+{% endblock %}
+
+{% block content %}
+{% if info %}
+    <div class="alert alert-danger" role="alert">
+        <strong>{{ info }}</strong>
+    </div>
+{% endif %}
+
+    <a href="{{ path }}" class="btn btn-lg btn-primary btn-block center-block">返回</a>
+
+{% endblock %}

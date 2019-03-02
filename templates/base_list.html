@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block header %}
+<span class="h1">{% block title %}{% endblock %}</span>
+{#<form class="form-inline pull-right">#}
+{#    <input class="form-control" type="text" placeholder="Search" name="search">#}
+{#    <button class="btn btn-default" type="submit">Search</button>#}
+{#</form>#}
+    {% block pageheaderright %}{% endblock %}
+    {% block filter %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+<table class="table table-hover table-striped">
+    {% block list %}{% endblock %}
+</table>
+{% if is_paginated %}
+<ul class="pagination">
+    <!-- 如果当前页还有上一页，显示一个上一页的按钮 -->
+    {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% endif %}
+    <!-- 显示当前页面信息 -->
+    <li class="active"><a href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+    <!-- 如果当前页还有下一页，显示一个下一页的按钮 -->
+    {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% endif %}
+</ul>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}公告{% endblock %}
+
+{% block navbar %}{% include "include/navbar.html" %}{% endblock %}
+
+{% block header %}
+<h1>{{ news.title }}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+<p>{{ news.content }}</p>
+</div>
+{% endblock %}
